@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">输入法demo</string>
+    <string name="setting_title">输入法demo 设置</string>
+
+    <string name="label_subtype_generic">中文(中国)</string>
+    <string name="label_subtype_en_GB">English (GB)</string>
+
+    <string name="space_label_en">Space</string>
+    <string name="switch_label_num">"123"</string>
+
+</resources>
