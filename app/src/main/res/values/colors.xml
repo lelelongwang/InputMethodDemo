@@ -6,4 +6,5 @@
     <color name="key_color">#FF797979</color>
     <color name="keyboardview_background">#414141</color>
     <color name="navigation_bar_background">#FFCFCFCF</color>
+    <color name="candidatesview_background">#414141</color>
 </resources>

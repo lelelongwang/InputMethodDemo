@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/candidates_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:textSize="18dp"
+        android:textColor="#FFFFFF"
+        android:background="@color/candidatesview_background"/>
+
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentEnd="true"-->
+        <!--android:padding="12dp"-->
+        <!--android:textSize="18dp"-->
+        <!--android:text="云联想位置"-->
+        <!--android:textColor="#FFFFFF"-->
+        <!--android:background="@color/candidatesview_background"/>-->
+
+</LinearLayout>

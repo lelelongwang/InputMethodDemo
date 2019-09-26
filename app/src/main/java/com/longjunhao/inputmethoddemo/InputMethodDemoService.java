@@ -13,7 +13,16 @@ import android.view.inputmethod.CursorAnchorInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodSubtype;
+import android.widget.TextView;
 
+
+/**
+ *
+ * 参考博客：
+ * https://www.cnblogs.com/jason-star/archive/2012/12/13/2816140.html
+ * http://www.voidcn.com/article/p-kansqoft-bth.html
+ * https://cloud.tencent.com/developer/article/1384966
+ */
 public class InputMethodDemoService extends InputMethodService {
 
     private static final String TAG = "InputMethodDemoService";
@@ -21,6 +30,8 @@ public class InputMethodDemoService extends InputMethodService {
     private KeyboardView mKeyboardView;
     private Keyboard mKeyboard;
     private InputConnection mCurrentInputConnection;
+    private View mCandidatesViewRoot;
+    private TextView mCandidateText;
 
     @Override
     public void onCreate() {
@@ -145,6 +156,17 @@ public class InputMethodDemoService extends InputMethodService {
         Log.d(TAG, "onUnbindInput: ");
     }
 
+    @Override
+    public View onCreateCandidatesView() {
+        if (mCandidatesViewRoot == null) {
+            mCandidatesViewRoot = LayoutInflater.from(this).inflate(R.layout.candidatesiew_layout,null);
+
+            mCandidateText = (TextView)mCandidatesViewRoot.findViewById(R.id.candidates_text);
+            mCandidateText.setVisibility(View.INVISIBLE);
+            setCandidatesViewShown(true);
+        }
+        return mCandidatesViewRoot;
+    }
 
     private KeyboardView.OnKeyboardActionListener keyboardListener = new KeyboardView.OnKeyboardActionListener() {
         @Override
@@ -164,6 +186,8 @@ public class InputMethodDemoService extends InputMethodService {
             Log.d(TAG, "onKey: ");
             //mCurrentInputConnection.commitText()
             char ch = (char) primaryCode;
+            mCandidateText.setVisibility(View.VISIBLE);
+            mCandidateText.setText(String.valueOf(ch));
             InputMethodDemoService.this.sendKeyChar(ch);
         }
 
