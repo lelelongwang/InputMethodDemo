@@ -9,15 +9,16 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.CompletionInfo;
 import android.view.inputmethod.CursorAnchorInfo;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodSubtype;
 import android.widget.TextView;
 
-
 /**
- *
+ * @author Admitor
+ * <p>
  * 参考博客：
  * https://www.cnblogs.com/jason-star/archive/2012/12/13/2816140.html
  * http://www.voidcn.com/article/p-kansqoft-bth.html
@@ -35,16 +36,47 @@ public class InputMethodDemoService extends InputMethodService {
 
     @Override
     public void onCreate() {
-        super.onCreate();
         Log.d(TAG, "onCreate: ");
+        super.onCreate();
+    }
+
+    @Override
+    public void onDestroy() {
+        Log.d(TAG, "onDestroy: ");
+        super.onDestroy();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        Log.d(TAG, "onConfigurationChanged: ");
+        super.onConfigurationChanged(newConfig);
+    }
+
+    @Override
+    public View onCreateExtractTextView() {
+        Log.d(TAG, "onCreateExtractTextView: ");
+        return super.onCreateExtractTextView();
+    }
+
+    @Override
+    public View onCreateCandidatesView() {
+        Log.d(TAG, "onCreateCandidatesView: ");
+        if (mCandidatesViewRoot == null) {
+            mCandidatesViewRoot = LayoutInflater.from(this).inflate(R.layout.candidatesiew_layout, null);
+
+            mCandidateText = (TextView) mCandidatesViewRoot.findViewById(R.id.candidates_text);
+            mCandidateText.setVisibility(View.INVISIBLE);
+            setCandidatesViewShown(true);
+        }
+        return mCandidatesViewRoot;
     }
 
     @Override
     public View onCreateInputView() {
         Log.d(TAG, "onCreateInputView: ");
-        mKeyboardBaseView = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.keyboard_base,null);
+        mKeyboardBaseView = (ViewGroup) LayoutInflater.from(this).inflate(R.layout.keyboard_base, null);
         mKeyboardView = mKeyboardBaseView.findViewById(R.id.keyboardview);
-        mKeyboard = new Keyboard(this,R.xml.keyboard_26_eng);
+        mKeyboard = new Keyboard(this, R.xml.keyboard_26_eng);
         mKeyboardView.setKeyboard(mKeyboard);
         mKeyboardView.setPreviewEnabled(true);
         mKeyboardView.setOnKeyboardActionListener(keyboardListener);
@@ -53,45 +85,71 @@ public class InputMethodDemoService extends InputMethodService {
     }
 
     @Override
-    public void onStartInputView(EditorInfo info, boolean restarting) {
-        super.onStartInputView(info, restarting);
-        Log.d(TAG, "onStartInputView: ");
+    public void onStartInput(EditorInfo attribute, boolean restarting) {
+        Log.d(TAG, "onStartInput: ");
+        super.onStartInput(attribute, restarting);
     }
 
     @Override
-    public void onStartInput(EditorInfo attribute, boolean restarting) {
-        super.onStartInput(attribute, restarting);
-        Log.d(TAG, "onStartInput: ");
+    public void onStartInputView(EditorInfo info, boolean restarting) {
+        Log.d(TAG, "onStartInputView: ");
+        super.onStartInputView(info, restarting);
+    }
+
+    @Override
+    public void onFinishInputView(boolean finishingInput) {
+        Log.d(TAG, "onFinishInputView: ");
+        super.onFinishInputView(finishingInput);
     }
 
     @Override
     public void onFinishInput() {
-        super.onFinishInput();
         Log.d(TAG, "onFinishInput: ");
+        super.onFinishInput();
+    }
+
+    @Override
+    public void onFinishCandidatesView(boolean finishingInput) {
+        Log.d(TAG, "onFinishCandidatesView: ");
+        super.onFinishCandidatesView(finishingInput);
+    }
+
+    @Override
+    public void onDisplayCompletions(CompletionInfo[] completions) {
+        Log.d(TAG, "onDisplayCompletions: ");
+        super.onDisplayCompletions(completions);
+    }
+
+    @Override
+    public void requestHideSelf(int flags) {
+        Log.d(TAG, "requestHideSelf: ");
+        super.requestHideSelf(flags);
     }
 
     @Override
     public void onWindowShown() {
-        super.onWindowShown();
         Log.d(TAG, "onWindowShown: ");
+        super.onWindowShown();
     }
 
     @Override
     public void onWindowHidden() {
-        super.onWindowHidden();
         Log.d(TAG, "onWindowHidden: ");
+        super.onWindowHidden();
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
+    public void onUpdateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd,
+                                  int candidatesStart, int candidatesEnd) {
+        Log.d(TAG, "onUpdateSelection: ");
+        super.onUpdateSelection(oldSelStart, oldSelEnd, newSelStart, newSelEnd, candidatesStart,
+            candidatesEnd);
     }
 
     @Override
     public void onViewClicked(boolean focusChanged) {
-        super.onViewClicked(focusChanged);
         Log.d(TAG, "onViewClicked: ");
+        super.onViewClicked(focusChanged);
     }
 
     @Override
@@ -119,60 +177,33 @@ public class InputMethodDemoService extends InputMethodService {
     }
 
     @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        Log.d(TAG, "onConfigurationChanged: ");
-    }
-
-    @Override
     public void onUpdateCursorAnchorInfo(CursorAnchorInfo cursorAnchorInfo) {
-        super.onUpdateCursorAnchorInfo(cursorAnchorInfo);
         Log.d(TAG, "onUpdateCursorAnchorInfo: ");
+        super.onUpdateCursorAnchorInfo(cursorAnchorInfo);
     }
 
     @Override
     protected void onCurrentInputMethodSubtypeChanged(InputMethodSubtype newSubtype) {
-        super.onCurrentInputMethodSubtypeChanged(newSubtype);
         Log.d(TAG, "onCurrentInputMethodSubtypeChanged: ");
-    }
-
-    @Override
-    public void onUpdateSelection(int oldSelStart, int oldSelEnd, int newSelStart, int newSelEnd,
-                                  int candidatesStart, int candidatesEnd) {
-        super.onUpdateSelection(oldSelStart, oldSelEnd, newSelStart, newSelEnd, candidatesStart,
-                candidatesEnd);
-        Log.d(TAG, "onUpdateSelection: ");
+        super.onCurrentInputMethodSubtypeChanged(newSubtype);
     }
 
     @Override
     public void onBindInput() {
-        super.onBindInput();
         Log.d(TAG, "onBindInput: ");
+        super.onBindInput();
     }
 
     @Override
     public void onUnbindInput() {
-        super.onUnbindInput();
         Log.d(TAG, "onUnbindInput: ");
-    }
-
-    @Override
-    public View onCreateCandidatesView() {
-        if (mCandidatesViewRoot == null) {
-            mCandidatesViewRoot = LayoutInflater.from(this).inflate(R.layout.candidatesiew_layout,null);
-
-            mCandidateText = (TextView)mCandidatesViewRoot.findViewById(R.id.candidates_text);
-            mCandidateText.setVisibility(View.INVISIBLE);
-            setCandidatesViewShown(true);
-        }
-        return mCandidatesViewRoot;
+        super.onUnbindInput();
     }
 
     private KeyboardView.OnKeyboardActionListener keyboardListener = new KeyboardView.OnKeyboardActionListener() {
         @Override
         public void onPress(int primaryCode) {
             Log.d(TAG, "onPress: ");
-
         }
 
         @Override
@@ -193,7 +224,7 @@ public class InputMethodDemoService extends InputMethodService {
 
         @Override
         public void onText(CharSequence text) {
-            Log.d(TAG, "onText: text="+text);
+            Log.d(TAG, "onText: text=" + text);
         }
 
         @Override

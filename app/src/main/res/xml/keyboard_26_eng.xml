@@ -125,7 +125,7 @@
             android:isModifier="true"
             android:isRepeatable="true"
             android:keyEdgeFlags="right"
-            android:keyIcon="@drawable/delete"
+            android:keyIcon="@mipmap/delete"
             android:keyWidth="14.345%p" />
     </Row>
     <Row
@@ -135,11 +135,11 @@
             android:codes="-69"
             android:isModifier="true"
             android:keyEdgeFlags="left"
-            android:keyIcon="@drawable/sym" />
+            android:keyIcon="@mipmap/sym" />
         <Key
             android:codes="-65"
             android:isModifier="true"
-            android:keyIcon="@drawable/switch_eng2chn" />
+            android:keyIcon="@mipmap/switch_eng2chn" />
         <Key
             android:codes="44"
             android:keyLabel="," />
@@ -159,7 +159,7 @@
             android:codes="10"
             android:isModifier="true"
             android:keyEdgeFlags="right"
-            android:keyIcon="@drawable/board_26_enter"
+            android:keyIcon="@mipmap/board_26_enter"
             android:keyWidth="14.345%p" />
     </Row>
 

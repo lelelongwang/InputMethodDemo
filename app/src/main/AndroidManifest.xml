@@ -4,17 +4,19 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_keyboard_black_24dp"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/Theme.InputmethodDemo">
 
-        <activity
-            android:name=".SettingActivity"
-            android:excludeFromRecents="true"
-            android:label="@string/setting_title"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait" />
+        <activity android:name=".SettingActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
         <service
             android:name=".InputMethodDemoService"
