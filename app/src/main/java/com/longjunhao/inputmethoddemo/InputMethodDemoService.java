@@ -2,8 +2,6 @@ package com.longjunhao.inputmethoddemo;
 
 import android.content.res.Configuration;
 import android.inputmethodservice.InputMethodService;
-import android.inputmethodservice.Keyboard;
-import android.inputmethodservice.KeyboardView;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -15,6 +13,8 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputMethodSubtype;
 import android.widget.TextView;
+import com.longjunhao.inputmethoddemo.views.Keyboard;
+import com.longjunhao.inputmethoddemo.views.KeyboardView;
 
 /**
  * @author Admitor

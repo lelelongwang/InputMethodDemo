@@ -24,3 +24,24 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+allprojects {
+
+    /**
+     *
+     * 1. 由于自定义的KeyboardView、Keyboard用到了底层的方法，故需要导入android.jar包，即本demo中
+     *    的classes.jar,本classes.jar是Android10工程生成的。其中android.jar所在路径为：
+     *    out/target/common/obj/JAVA_LIBRARIES/framework_intermediates/classes.jar
+     *
+     * 2. 本jar包没有放在libs下，而是放在了外面，原因就是本jar只是编译apk使用。如果放在libs里面的话，会把jar编译在生成的apk里。
+     *
+     */
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xlint:unchecked" << "-Xlint:deprecation"
+            // todo：后期代码优化需要去掉对android.jar包的依赖。
+            options.compilerArgs.add('-Xbootclasspath/p:classes.jar')
+        }
+
+    }
+}

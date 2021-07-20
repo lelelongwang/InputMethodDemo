@@ -19,7 +19,7 @@
             android:text="设置"/>
     </LinearLayout>
 
-    <android.inputmethodservice.KeyboardView
+    <com.longjunhao.inputmethoddemo.views.KeyboardView
         android:id="@+id/keyboardview"
         android:layout_width="match_parent"
         android:keyBackground="@color/key_color"
